@@ -1,0 +1,18 @@
+{
+  "name": "yuzyuk-roman/verification",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "YuzyukRoman\\Verification\\Email\\": "src/Verification/Email"
+    }
+  },
+  "authors": [
+    {
+      "name": "Roman Yuzyuk",
+      "email": "romanyuzyukfront@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  }
+}
