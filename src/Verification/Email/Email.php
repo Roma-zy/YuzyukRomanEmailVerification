@@ -30,20 +30,18 @@ class Email
 
     public function verifyEmails(): array
     {
-        $valid_emails = array();
+        return array_map(function ($item) {
+            $res = ["value" => $item];
 
-        foreach ($this->emails as $email) {
-            if (gettype($email) !== 'string') {
-                continue;
+            if (gettype($item) !== 'string') {
+                $res['isValid'] = false;
+            } else {
+                $parts = explode('@', $item);
+                $domain = array_pop($parts);
+                $res['isValid'] = $this->isValidEmail($item) && $this->verifyMx($domain);
             }
 
-            $parts = explode('@', $email);
-            $domain = array_pop($parts);
-            if ($this->isValidEmail($email) && $this->verifyMx($domain)) {
-                $valid_emails[] = $email;
-            }
-        }
-
-        return $valid_emails;
+            return $res;
+        }, $this->emails);
     }
 }
